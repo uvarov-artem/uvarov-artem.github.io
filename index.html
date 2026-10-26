@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Артём Уваров — электрик. Электромонтаж под ключ, тёплые полы, MyHeat</title>
+  <meta name="description" content="Электрика с нуля под ключ: проект, щит, проводка, освещение. Тёплые полы, контроллеры MyHeat, укладка плитки и натяжные потолки.">
+  <meta name="theme-color" content="#0E0F11">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Артём Уваров — электрик">
+  <meta property="og:description" content="Электрика с нуля под ключ, тёплые полы, MyHeat, плитка, натяжные потолки.">
+  <meta property="og:image" content="images/hero.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/hero.jpg">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="preview-banner" id="previewBanner" hidden>Предпросмотр черновика из админки — посетители этого не видят</div>
+
+  <!-- Шапка -->
+  <header class="header" id="header">
+    <div class="wrap header__in">
+      <a href="#top" class="logo" aria-label="На главную">
+        <span class="logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9v8a7 7 0 0 0 14 0V9" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="24.5" r="1.8" fill="var(--accent)"/></svg>
+        </span>
+        <span class="logo__text"><b>Уваров</b><small>электромонтаж</small></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Разделы">
+        <a href="#services">Услуги</a>
+        <a href="#myheat">MyHeat</a>
+        <a href="#works">Работы</a>
+        <a href="#process">Этапы</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <div class="header__cta">
+        <a class="header__phone" data-bind="phone" href="#"></a>
+        <a class="btn btn--accent btn--sm" href="#contact">Заявка</a>
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Первый экран -->
+    <section class="hero dark">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="wrap hero__in">
+        <div class="hero__text">
+          <p class="eyebrow reveal"><i class="dot"></i><span data-bind="hero.eyebrow"></span></p>
+          <h1 class="hero__title reveal" data-bind="hero.title"></h1>
+          <p class="hero__sub reveal" data-bind="hero.subtitle"></p>
+          <div class="hero__actions reveal">
+            <a class="btn btn--accent" href="#contact">Рассчитать стоимость <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn--ghost" data-bind="tgLink" href="#" target="_blank" rel="noopener"><svg class="i i--fill" viewBox="0 0 24 24"><use href="#ic-tg"/></svg> Написать в Telegram</a>
+          </div>
+        </div>
+        <figure class="hero__media reveal">
+          <img data-bind-src="hero.image" alt="Сборка электрощита" fetchpriority="high">
+          <figcaption class="spec spec--a"><span>ЩР · 3 фазы</span></figcaption>
+          <figcaption class="spec spec--b"><span>УЗО 30 мА</span></figcaption>
+          <figcaption class="spec spec--c"><span>ВВГнг-LS 3×2,5</span></figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="hero__bottom">
+          <dl class="stats" id="heroStats"></dl>
+          <div class="sign">
+            <span class="sign__name" data-bind="contacts.name"></span>
+            <span class="sign__role" data-bind="contacts.city"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="section light" id="services">
+      <div class="wrap">
+        <div class="head">
+          <p class="label">(01) Услуги</p>
+          <h2 class="h2 reveal">Пять направлений —<br>один подрядчик</h2>
+          <p class="head__note reveal">Нажмите на направление, чтобы открыть полный прайс. Цены ориентировочные, точная смета — после замера.</p>
+        </div>
+        <div class="svc" id="svcList"></div>
+      </div>
+      <div class="cursor-img" id="cursorImg" aria-hidden="true"><img alt=""></div>
+    </section>
+
+    <!-- MyHeat -->
+    <section class="section dark myheat" id="myheat">
+      <div class="wrap myheat__in">
+        <div>
+          <p class="label">(02) Умное отопление</p>
+          <h2 class="h2 reveal" data-bind="myheat.title"></h2>
+          <p class="lead reveal" data-bind="myheat.text"></p>
+          <ul class="ticks reveal" id="myheatPoints"></ul>
+          <a class="link-arrow" href="https://myheat.net/" target="_blank" rel="noopener">Сайт производителя MyHeat <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+        <div class="phone reveal" aria-hidden="true">
+          <div class="phone__screen">
+            <div class="ph-top"><span>Дом · Истра</span><span class="ph-ok">● онлайн</span></div>
+            <div class="ph-big"><small>Улица</small><b>−7°</b></div>
+            <div class="ph-rooms">
+              <div><span>Гостиная</span><b>22,5°</b><i style="--v:.72"></i></div>
+              <div><span>Спальня</span><b>20,0°</b><i style="--v:.55"></i></div>
+              <div><span>Ванная · пол</span><b>27,0°</b><i style="--v:.9"></i></div>
+              <div><span>Котёл, подача</span><b>54°</b><i style="--v:.6"></i></div>
+            </div>
+            <div class="ph-mode"><span class="on">Дома</span><span>Работа</span><span>Уехали</span></div>
+            <div class="ph-alert"><b>Уведомление</b>Напряжение восстановлено, котёл в работе</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Работы -->
+    <section class="section light" id="works">
+      <div class="wrap">
+        <div class="head head--row">
+          <div>
+            <p class="label">(03) Работы</p>
+            <h2 class="h2 reveal">Объекты</h2>
+          </div>
+          <div class="filters" id="workFilters" role="tablist"></div>
+        </div>
+        <div class="works" id="worksGrid"></div>
+      </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section class="section paper2 about">
+      <div class="wrap about__in">
+        <figure class="about__media reveal"><img data-bind-src="about.image" alt="Работа мастера" loading="lazy"></figure>
+        <div class="about__text">
+          <p class="label">(04) Обо мне</p>
+          <h2 class="h2 reveal" data-bind="about.title"></h2>
+          <p class="lead reveal" data-bind="about.text"></p>
+          <ul class="ticks ticks--light reveal" id="aboutPoints"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Этапы и гарантии -->
+    <section class="section dark" id="process">
+      <div class="wrap">
+        <div class="head">
+          <p class="label">(05) Как работаю</p>
+          <h2 class="h2 reveal">Четыре шага от замера до акта</h2>
+        </div>
+        <ol class="steps" id="steps"></ol>
+        <div class="adv" id="adv"></div>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section light" id="reviews">
+      <div class="wrap">
+        <div class="head head--row">
+          <div>
+            <p class="label">(06) Отзывы</p>
+            <h2 class="h2 reveal">Что говорят клиенты</h2>
+          </div>
+          <div class="arrows">
+            <button class="arrow" data-scroll="-1" aria-label="Назад"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="arrow" data-scroll="1" aria-label="Вперёд"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="reviews" id="reviews-track"></div>
+    </section>
+
+    <!-- Вопросы -->
+    <section class="section light faq" id="faq">
+      <div class="wrap faq__in">
+        <div>
+          <p class="label">(07) Вопросы</p>
+          <h2 class="h2 reveal">Частые вопросы</h2>
+        </div>
+        <div class="faq__list" id="faqList"></div>
+      </div>
+    </section>
+
+    <!-- Заявка -->
+    <section class="section dark contact" id="contact">
+      <div class="wrap contact__in">
+        <div class="contact__info">
+          <p class="label">(08) Заявка</p>
+          <h2 class="h2 reveal" data-bind="form.title"></h2>
+          <p class="lead reveal" data-bind="form.text"></p>
+          <ul class="direct">
+            <li><span>Телефон</span><a data-bind="phone" href="#"></a></li>
+            <li><span>Telegram</span><a data-bind="tgLink" href="#" target="_blank" rel="noopener"></a></li>
+            <li><span>WhatsApp</span><a data-bind="waLink" href="#" target="_blank" rel="noopener"></a></li>
+            <li><span>Режим</span><b data-bind="contacts.hours"></b></li>
+            <li><span>География</span><b data-bind="contacts.city"></b></li>
+          </ul>
+        </div>
+
+        <form class="form" id="leadForm" novalidate>
+          <fieldset>
+            <legend>Что нужно сделать <em>— можно несколько</em></legend>
+            <div class="chips" id="svcChips"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Объект</legend>
+            <div class="seg" id="objType">
+              <label><input type="radio" name="obj" value="Квартира" checked><span>Квартира</span></label>
+              <label><input type="radio" name="obj" value="Дом"><span>Дом</span></label>
+              <label><input type="radio" name="obj" value="Коммерция"><span>Коммерция</span></label>
+            </div>
+          </fieldset>
+          <div class="row2">
+            <label class="field"><span>Площадь, м²</span><input name="area" inputmode="numeric" placeholder="например, 75"></label>
+            <label class="field"><span>Сроки</span>
+              <select name="when"><option>Как можно скорее</option><option>В течение месяца</option><option>Через 1–3 месяца</option><option>Пока считаю бюджет</option></select>
+            </label>
+          </div>
+          <div class="row2">
+            <label class="field"><span>Ваше имя *</span><input name="name" autocomplete="name" required placeholder="Как к вам обращаться"></label>
+            <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" placeholder="+7"></label>
+          </div>
+          <label class="field"><span>Комментарий</span><textarea name="comment" rows="3" placeholder="Этап ремонта, адрес или район, пожелания"></textarea></label>
+          <p class="form__err" id="formErr" hidden></p>
+          <div class="form__send">
+            <button type="submit" class="btn btn--tg" data-via="tg"><svg class="i i--fill" viewBox="0 0 24 24"><use href="#ic-tg"/></svg> Отправить в Telegram</button>
+            <button type="submit" class="btn btn--wa" data-via="wa"><svg class="i i--fill" viewBox="0 0 24 24"><use href="#ic-wa"/></svg> Отправить в WhatsApp</button>
+          </div>
+          <p class="form__note">Сайт не хранит ваши данные — заявка открывается в выбранном мессенджере, вы отправляете её сами.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer dark">
+    <div class="wrap">
+      <div class="footer__top">
+        <a class="footer__big" href="#top">Уваров<span>.</span></a>
+        <div class="footer__cols">
+          <div><span class="label">Связь</span><a data-bind="phone" href="#"></a><a data-bind="tgLink" href="#" target="_blank" rel="noopener">Telegram</a><a data-bind="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+          <div><span class="label">Разделы</span><a href="#services">Услуги</a><a href="#works">Работы</a><a href="#faq">Вопросы</a></div>
+        </div>
+      </div>
+      <div class="footer__bot">
+        <span>© <span id="year"></span> <span data-bind="contacts.name"></span></span>
+        <span>Цены на сайте не являются публичной офертой</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Мобильная панель -->
+  <div class="mbar" id="mbar">
+    <a data-bind="phone" href="#" class="mbar__call" aria-label="Позвонить"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    <a href="#contact" class="mbar__main">Оставить заявку</a>
+  </div>
+
+  <!-- Лайтбокс -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" aria-label="Закрыть"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <img alt="">
+    <p></p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="ic-tg" viewBox="0 0 24 24"><path d="M21.4 4.2 2.9 11.3c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.7ZM9.3 14.2l8.8-5.6c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.2-1.6-4.5Z"/></symbol>
+    <symbol id="ic-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3 1 2.6 1.1 2.8.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></symbol>
+  </svg>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
