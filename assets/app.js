@@ -11,6 +11,8 @@
   const get = (obj, path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
   const digits = s => String(s || '').replace(/\D/g, '');
   const tgUser = s => String(s || '').trim().replace(/^@/, '').replace(/^https?:\/\/t\.me\//, '');
+  // В поле Telegram можно указать username или номер телефона
+  const tgIsPhone = s => /^\+?[\d\s()-]{10,}$/.test(String(s || '').trim());
 
   const ICONS = [
     '<path d="M4 20h16M6 20V9l6-5 6 5v11M10 20v-6h4v6"/>',
@@ -35,10 +37,11 @@
 
   function render(c) {
     const ct = c.contacts || {};
-    const tg = tgUser(ct.telegram);
+    const tgPhone = tgIsPhone(ct.telegram);
+    const tg = tgPhone ? '+' + digits(ct.telegram) : tgUser(ct.telegram);
     const links = {
       phone: { href: 'tel:' + (ct.phone || '').replace(/[^\d+]/g, ''), text: ct.phoneDisplay || ct.phone },
-      tgLink: { href: 'https://t.me/' + tg, text: '@' + tg },
+      tgLink: { href: 'https://t.me/' + tg, text: tgPhone ? ct.phoneDisplay || tg : '@' + tg },
       waLink: { href: 'https://wa.me/' + digits(ct.whatsapp), text: ct.phoneDisplay || '+' + digits(ct.whatsapp) }
     };
 
@@ -129,7 +132,7 @@
     $('#svcChips').innerHTML = services.map(s => `<label class="chip"><input type="checkbox" name="svc" value="${esc(s.title)}"><span>${esc(s.title)}</span></label>`).join('')
       + `<label class="chip"><input type="checkbox" name="svc" value="Другое"><span>Другое</span></label>`;
 
-    return { tg, wa: digits(ct.whatsapp), name: ct.name };
+    return { tg, tgPhone, wa: digits(ct.whatsapp), name: ct.name };
   }
 
   // Редакционная сетка работ: ряды 7+5, 4+4+4, 5+7… Картинки в одном ряду одной высоты
@@ -310,12 +313,12 @@
 
       const url = via === 'wa'
         ? `https://wa.me/${ctx.wa}?text=${encodeURIComponent(text)}`
-        : `https://t.me/${ctx.tg}?text=${encodeURIComponent(text)}`;
+        : `https://t.me/${ctx.tg}` + (ctx.tgPhone ? '' : `?text=${encodeURIComponent(text)}`);
       window.open(url, '_blank', 'noopener');
 
       // Копия в буфер — на случай если мессенджер не подставит текст
       navigator.clipboard?.writeText(text).then(
-        () => toast(via === 'wa' ? 'Открываем WhatsApp. Текст заявки также скопирован.' : 'Открываем Telegram. Если текст не подставился — он уже в буфере, просто вставьте его.'),
+        () => toast(via === 'wa' ? 'Открываем WhatsApp. Текст заявки также скопирован.' : (ctx.tgPhone ? 'Открываем Telegram. Текст заявки скопирован — вставьте его в чат и отправьте.' : 'Открываем Telegram. Если текст не подставился — он уже в буфере, просто вставьте его.')),
         () => toast('Открываем мессенджер…')
       );
     });
