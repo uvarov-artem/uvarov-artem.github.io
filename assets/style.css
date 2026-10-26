@@ -240,22 +240,42 @@ ul, ol { padding: 0; list-style: none; }
   position: relative;
 }
 .phone::before { content: ""; position: absolute; top: 24px; left: 50%; width: 84px; height: 24px; border-radius: 20px; background: #000; transform: translateX(-50%); z-index: 2; }
-.phone__screen { height: 100%; border-radius: 36px; background: #f3f1ec; color: #111; padding: 58px 20px 20px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; font-size: 13px; }
-.ph-top { display: flex; justify-content: space-between; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: #555; }
-.ph-ok { color: #1a9a52; }
-.ph-big { display: flex; justify-content: space-between; align-items: end; padding: 14px 16px; border-radius: 18px; background: #111; color: #fff; }
-.ph-big small { font: 400 11px var(--mono); text-transform: uppercase; opacity: .6; }
-.ph-big b { font-size: 44px; font-weight: 500; letter-spacing: -.04em; line-height: 1; }
-.ph-rooms { display: grid; gap: 8px; }
-.ph-rooms div { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 12px 14px; background: #fff; border-radius: 14px; }
-.ph-rooms b { font-weight: 600; }
-.ph-rooms i { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: #e7e4dd; position: relative; overflow: hidden; }
-.ph-rooms i::after { content: ""; position: absolute; inset: 0; width: calc(var(--v) * 100%); background: var(--accent); border-radius: 3px; }
-.ph-mode { display: grid; grid-template-columns: repeat(3, 1fr); background: #e5e2db; border-radius: 12px; padding: 3px; font-size: 12px; text-align: center; }
-.ph-mode span { padding: 8px 0; border-radius: 9px; }
-.ph-mode .on { background: #fff; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-.ph-alert { margin-top: auto; padding: 12px 14px; border-radius: 14px; background: #fff; border-left: 3px solid var(--accent); font-size: 12px; color: #444; }
-.ph-alert b { display: block; color: #111; margin-bottom: 2px; }
+/* Экран приложения MyHeat — по мотивам реального интерфейса */
+.phone__screen { --mh: #ff7f27; height: 100%; border-radius: 36px; background: #000; color: #111; display: flex; flex-direction: column; overflow: hidden; font: 600 12px/1.2 var(--font); letter-spacing: -.01em; }
+.ph-status { display: flex; justify-content: space-between; align-items: center; padding: 15px 22px 0; height: 40px; color: #fff; font-size: 12px; }
+.ph-sig { display: flex; gap: 2px; align-items: end; }
+.ph-sig i { width: 3px; background: #fff; border-radius: 1px; }
+.ph-sig i:nth-child(1) { height: 5px; } .ph-sig i:nth-child(2) { height: 7px; } .ph-sig i:nth-child(3) { height: 9px; }
+.ph-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px 12px; color: #fff; }
+.ph-head b { flex: 1; text-align: center; font-size: 15px; font-weight: 700; padding-left: 18px; }
+.ph-btn { width: 30px; height: 30px; border: 1.5px solid #fff; border-radius: 8px; display: grid; place-items: center; flex: none; }
+.ph-btn svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
+.ph-btn svg circle { fill: #fff; stroke: none; }
+.ph-chev { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; margin-right: 18px; }
+.ph-tabs { display: flex; gap: 6px; padding: 0 0 16px 6px; overflow: hidden; }
+.ph-mini { display: grid; gap: 5px; flex: none; }
+.ph-mini span { width: 40px; height: 42px; border-radius: 12px; background: #fff; display: grid; place-items: center; }
+.ph-mini svg { width: 18px; height: 18px; fill: none; stroke: var(--mh); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ph-tab { flex: none; width: 92px; height: 89px; border-radius: 14px; background: #fff; padding: 8px; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; line-height: 1.15; }
+.ph-tab i { width: 28px; height: 28px; border-radius: 50%; background: var(--mh); display: grid; place-items: center; }
+.ph-tab svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ph-tab.on { background: var(--mh); color: #fff; }
+.ph-tab.on i { background: #fff; }
+.ph-tab.on svg { stroke: #2bb24c; }
+.ph-sheet { flex: 1; background: #fff; border-radius: 20px 20px 0 0; padding: 10px 6px 0; display: flex; flex-direction: column; gap: 7px; }
+.ph-row { display: flex; align-items: center; gap: 8px; padding: 10px 9px; border: 1px solid #ececec; border-radius: 14px; }
+.ph-row b { flex: 1; font-size: 11.5px; font-weight: 600; }
+.ph-ic { width: 28px; height: 28px; border-radius: 8px; background: #efefef; display: grid; place-items: center; flex: none; }
+.ph-ic svg { width: 17px; height: 17px; fill: none; stroke: #777; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ph-ic.on { background: var(--mh); }
+.ph-ic.on svg { stroke: #fff; stroke-width: 2.2; }
+.ph-val { text-align: right; font-size: 13.5px; font-weight: 700; color: #777; white-space: nowrap; }
+.ph-val small { display: block; font-size: 8.5px; font-weight: 400; color: #888; margin-bottom: 2px; padding-right: 6px; }
+.ph-val em { font-style: normal; color: var(--mh); }
+.ph-nav { margin: auto -6px 0; display: flex; justify-content: space-around; align-items: center; padding: 10px 8px 16px; border-top: 1px solid #f0f0f0; color: #555; }
+.ph-nav span { display: flex; align-items: center; gap: 6px; padding: 7px 9px; border-radius: 10px; font-size: 11px; }
+.ph-nav span.on { background: #ececec; color: #000; }
+.ph-nav svg { width: 17px; height: 17px; stroke-width: 2.2; stroke-linecap: round; }
 
 /* ---------- Работы ---------- */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
