@@ -489,3 +489,12 @@ ul, ol { padding: 0; list-style: none; }
   .arrows { display: none; }
   .seg span { font-size: 14px; }
 }
+
+/* ---------- Курсор-лампочка (только мышь) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html, body { cursor: url("cursor.svg") 2 2, auto; }
+  a, button, label, summary, select, [role="button"], .work, .chip span, .seg span, .faq__list summary, .field select, .lightbox {
+    cursor: url("cursor-on.svg") 2 2, pointer;
+  }
+  input, textarea { cursor: text; }
+}
